@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MvcEticaret.Models.CartProductViewModel>
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+    decimal subtotal = 0;
+    decimal taxRate = 0.18m; // KDV oranı %18 olarak varsayıldı
+}
+
+<h1>Shopping Cart</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cartProduct in Model)
+        {
+            <tr>
+                <td>@cartProduct.Id</td>
+                <td>@cartProduct.Product.Title</td>
+                <td>@cartProduct.Quantity</td>
+                <td>@cartProduct.TotalPrice</td>
+            </tr>
+            subtotal += cartProduct.TotalPrice;
+        }
+    </tbody>
+</table>
+
+<div>
+    <strong>Subtotal:</strong> @subtotal <br />
+    <strong>Tax (@(taxRate * 100)%):</strong> @(subtotal * taxRate) <br />
+    <strong>Total:</strong> @(subtotal * (1 + taxRate))
+</div>
+
+<div class="mt-4">
+    <a class="btn btn-secondary" asp-action="Index" asp-controller="Home">Continue Shopping</a>
+</div>
