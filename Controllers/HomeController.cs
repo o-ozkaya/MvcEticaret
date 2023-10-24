@@ -10,7 +10,7 @@ namespace MvcEticaret.Controllers
 		private readonly ILogger<HomeController> _logger;
 
 
-		public List<ProductItemModel> productItems = new List<ProductItemModel>
+		public static List<ProductItemModel> productItems = new List<ProductItemModel>
 		{
 
 				new ProductItemModel {Id=1, Title = "Mansion", StarCount = 5, OldPrice = 1310.34m, Price = 1300m, ImageUrl = "https://robbreport.com/wp-content/uploads/2023/07/DJI_0661.jpg", IsSale = true, Option= false },
@@ -34,6 +34,11 @@ namespace MvcEticaret.Controllers
 		{
 			return View(productItems);
 		}
+
+		public IActionResult About()
+		{
+            return View();
+        }
 
 		public IActionResult Privacy()
 		{
